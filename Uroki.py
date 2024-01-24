@@ -53,17 +53,17 @@ FPS = 60
 #создания мяча и ракетки   
 racket1 = Player('platform.png', 30, 200, 4, 50, 150) 
 racket2 = Player('platform.png', 520, 200, 4, 50, 150)
-#ball = GameSprite('ball.png', 200, 200, 4, 50, 50)
+ball = GameSprite('ball.png', 200, 200, 4, 50, 50)
+
+#шрифты и надписи
+font.init()
+font = font.Font(None, 35)
+lose1 = font.render('PLAYER 1 LOSE!', True, (180, 0, 0))
+lose2 = font.render('PLAYER 2 LOSE!', True, (180, 0, 0))
 
 
-#font.init()
-#font = font.Font(None, 35)
-#lose1 = font.render('PLAYER 1 LOSE!', True, (180, 0, 0))
-#lose2 = font.render('PLAYER 2 LOSE!', True, (180, 0, 0))
-
-
-#speed_x = 3
-#speed_y = 3
+speed_x = 3
+speed_y = 3
 
 
 while game:
@@ -75,13 +75,12 @@ while game:
         window.fill(back)
         racket1.update_l()
         racket2.update_r()
-        #ball.rect.x += speed_x
-        #ball.rect.y += speed_y
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
 
-
-        '''if sprite.collide_rect(racket1, ball) or sprite.collide_rect(racket2, ball):
+        #мяч касается платформы
+        if sprite.collide_rect(racket1, ball) or sprite.collide_rect(racket2, ball):
             speed_x *= -1
-            speed_y *= 1
         
         #если мяч достигает границ экрана, меняем направление его движения
         if ball.rect.y > win_height-50 or ball.rect.y < 0:
@@ -99,11 +98,11 @@ while game:
         if ball.rect.x > win_width:
             finish = True
             window.blit(lose2, (200, 200))
-            game_over = True'''
-
-    racket1.reset()
-    racket2.reset()
-        #ball.reset()
+            game_over = True
+        # отрисовываем
+        racket1.reset()  
+        racket2.reset()
+        ball.reset()
 
     display.update()
     clock.tick(FPS)
